@@ -1,0 +1,28 @@
+syntax="proto3";
+
+package model;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "users.proto";
+
+service LoadsService {
+  rpc FindCustomerLoadsWithUser(User) returns (Loads) {};
+  rpc ListAllLoads(google.protobuf.Empty) returns (Loads) {};
+}
+
+message Loads {
+  string customer = 1;
+  repeated Load load = 2;
+}
+
+message Load {
+    TypeLoads type = 1;
+    string interest_rate = 2;
+}
+
+enum TypeLoads {
+    PERSONAL    = 0;
+    GUARANTEED  = 1;
+    CONSIGNMENT = 2;
+}
